@@ -1,34 +1,34 @@
 /**
- * Created by li on 2018/2/10 9:34.
+ * Created by li on 2018/1/31 17:25.
  */
-
-const {join} = require('path')
+const { join } = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
-    entry:{
-        app:join(__dirname,'../src/main.js')
+    entry: {
+        app: join(__dirname, '../src/main.js')
     },
     output: {
         filename: "js/[name].js",
-        path:join(__dirname,'../dist'),
+        path: join(__dirname, '../dist'),
         publicPath: "/public/"
     },
     resolve: {
-        extensions: ['.js','.vue','.jsx']
+        extensions: ['.js', '.vue', '.jsx']
     },
-    module:{
-        rules:[
+    module: {
+        rules :[
             {
-                test:/\.js$/,
+                test : /\.js$/,
                 loader:'babel-loader',
-                include:join(__dirname,'../src')
+                include : join(__dirname , '../src')
             },
             {
                 test:/\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader:'url-loader',
                 options:{
                     limit:10000,
-                    name:join(__dirname,'../dist','media/[name].[hash:7].[ext]')
+                    //这里的file-loader 对__dirname有影响，所以不能直接__dirname 深坑
+                    name:'./dist/media/[name].[hash].[ext]'
                 }
             },
             {
@@ -41,8 +41,11 @@ module.exports = {
             }
         ]
     },
-    plugins: [
+    plugins:[
         new htmlWebpackPlugin({
+            template:join(__dirname,'../src/template.html'),
+            filename:'index.html',
+            inject:true,
             minify:{
                 removeComments:true,
                 collapseWhitespace:true,

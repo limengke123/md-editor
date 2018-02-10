@@ -1,6 +1,7 @@
 /**
- * Created by li on 2018/2/10 9:52.
+ * Created by li on 2018/1/31 17:26.
  */
+// const {join} = require('path')
 const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 
@@ -8,12 +9,12 @@ const baseConfig = require('./webpack.base.config')
 
 const config = webpackMerge(baseConfig,{
     output:{
-        publicPath:'/'
+        publicPath:"/"
     },
     module:{
         rules:[
             {
-                test:/\.vue$/,
+                test : /\.vue$/,
                 loader:'vue-loader'
             },
             {
@@ -35,14 +36,23 @@ const config = webpackMerge(baseConfig,{
     devtool:'#cheap-module-eval-source-map',
     devServer:{
         port:8000,
-        host:'127.0.0.1',
+        host:'0.0.0.0',
         overlay:{
             errors:true
         },
         hot:true,
-        open:true,
+        open:false,
         progress:true,
+        // openPage:'public/',
         historyApiFallback:true,
+        proxy:{
+            '/api': {
+                target: 'https://cnodejs.org/api/v1',
+                pathRewrite: {'^/api' : '/'},
+                changeOrigin: true,
+                secure:true
+            }
+        }
     },
     plugins:[
         new webpack.HotModuleReplacementPlugin(),

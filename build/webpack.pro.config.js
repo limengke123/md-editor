@@ -1,42 +1,41 @@
 /**
- * Created by li on 2018/2/10 9:58.
+ * Created by li on 2018/2/1 17:12.
  */
-const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const ExtractPlugin = require('extract-text-webpack-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const webpack = require('webpack')
 const path = require('path')
-
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const baseConfig = require('./webpack.base.config')
 
-const config = webpackMerge(baseConfig, {
-    entry: {
-        vendor: ['vue'],
+const config = webpackMerge(baseConfig,{
+    entry:{
+        vendor:['vue'],
     },
-    output: {
-        filename: 'js/[name].[chunkhash:8].js',
-        chunkFilename: 'js/[id].js',
-        publicPath: './'
+    output:{
+        filename:'js/[name].[chunkhash:8].js',
+        chunkFilename:'js/[id].js',
+        publicPath:'./'
     },
-    module: {
-        rules: [
+    module:{
+        rules:[
             {
-                test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    extractCSS: true
+                test : /\.vue$/,
+                loader:'vue-loader',
+                options:{
+                    extractCSS:true
                 }
             },
             {
-                test: /\.styl/,
+                test:/\.styl/,
                 use: ExtractPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
+                    fallback:'style-loader',
+                    use:[
                         'css-loader',
                         {
-                            loader: "postcss-loader",
-                            options: {
-                                sourceMap: true
+                            loader:'postcss-loader',
+                            options:{
+                                sourceMap:true
                             }
                         },
                         'stylus-loader'
@@ -44,30 +43,29 @@ const config = webpackMerge(baseConfig, {
                 })
             }
         ]
-
     },
-    plugins: [
+    plugins:[
         new webpack.DefinePlugin({
-            'process-env': {
-                NODE_ENV: '"production"'
+            'process.env':{
+                NODE_ENV:'"production"'
             }
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor'
+            name:'vendor'
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'runtime'
+            name:'runtime'
         }),
         new ExtractPlugin('css/styles.[contentHash:8].css'),
         new webpack.optimize.UglifyJsPlugin({
-            /*compress: {
-                warning: false
+            compress: {
+                warnings: false
             },
-            sourceMap: true*/
+            sourceMap:true
         }),
         new OptimizeCSSPlugin({
-            cssProcessorOptions: {
-                safe: true
+            cssProcessorOptions:{
+                safe:true
             }
         })
     ]

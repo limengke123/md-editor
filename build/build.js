@@ -11,20 +11,20 @@ const config = require('./webpack.pro.config')
 const spinner = ora('building now !!!!')
 spinner.start()
 
-rm(path.join(__dirname,'../dist'),err=>{
-    if(err) throw err
-    webpack(config,(err,stats) => {
+rm(path.join(__dirname, '../dist'), err => {
+    if (err) throw err
+    webpack(config, (err, stats) => {
         spinner.stop()
-        if(err) throw err
+        if (err) throw err
         process.stdout.write(stats.toString({
-            colors:true,
-            modules:false,
-            children:false,
-            chunks:false,
-            progress:false,
-            chunkModules:false
-        }) + '\n\n')
-        if(stats.hasErrors()){
+                colors: true,
+                modules: false,
+                children: false,
+                chunks: false,
+                progress: false,
+                chunkModules: false
+            }) + '\n\n')
+        if (stats.hasErrors()) {
             process.stdout.write(chalk.red('build failed \n'))
             process.exit(1)
         }
