@@ -1,5 +1,5 @@
 <template lang="pug">
-    .outputer this is outputer
+    .outputer
 </template>
 
 <script>
@@ -9,6 +9,14 @@
 </script>
 
 <style lang="stylus" scoped>
+    @import '../styl/var.styl'
     .outputer
-        flex-grow 1
+        width 50%
+        box-sizing border-box
+        padding $padding
+        background-color $bgColor
+        font-size $fontSize
+        color $color
+        box-shadow $box
+        font-family inherit
 </style>

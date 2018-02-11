@@ -20,4 +20,6 @@
     .app
         display flex
         height 100%
+        background #e0e0e0
+        font-family Microsoft Yahei,PingHei,Helvetica Neue,Helvetica,STHeitiSC-Light,Arial,sans-serif
 </style>

@@ -27,4 +27,5 @@
         .puter
             display flex
             flex-grow 1
+            padding 15px
 </style>

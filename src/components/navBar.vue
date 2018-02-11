@@ -44,7 +44,7 @@
                         classes:"fa fa-th",
                         clicks:"insert('\n\n| title | title | title |\n| --- | --- | --- |\n| item | item | item |')"
                     },{
-                        classes:"fa fa-bars",
+                        classes:"fa fa-github",
                         clicks:"redirect('https://github.com/jrainlau/markcook')"
                     },{
                         classes:"fa fa-question",

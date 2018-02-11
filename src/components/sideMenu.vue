@@ -49,6 +49,48 @@
                     },{
                         current:false,
                         content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
+                    },{
+                        current:false,
+                        content:"ddsadas"
                     },
                 ]
             }
@@ -60,11 +102,13 @@
     .sideMenu
         display flex
         flex-direction column
+        flex-shrink 0
         align-items center
         justify-content space-between
         width 220px
         height 100%
         background-color #f5f5f5
+        box-shadow 4px 5px 3px #aaa
         .first
             width 100%
             display flex

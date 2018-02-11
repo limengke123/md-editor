@@ -7,3 +7,16 @@ ul,li,ol
   list-style none
 a
   text-decoration none
+  /** 修改滚动条的样式 **/
+*::-webkit-scrollbar {
+  display: block;
+  width: 5px;
+  background: #FAFAFA;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #E0E0E0;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #BDBDBD;
+}
