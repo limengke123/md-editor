@@ -12,45 +12,61 @@
                 btns:[
                     {
                         classes:"fa fa-bars",
-                        clicks:"showMenu"
+                        clicks:this.showMenu
                     },{
                         classes:"fa fa-bold",
-                        clicks:"insert('**Bold**')"
+                        clicks:this.insert('**Bold**')
                     },{
                         classes:"fa fa-italic",
-                        clicks:"insert('*Italic*')"
+                        clicks:this.insert('*Italic*')
                     },{
                         classes:"fa fa-link",
                         clicks:"[Link](http://example.com/)"
                     },{
                         classes:"fa fa-quote-left",
-                        clicks:"insert('\n> ')"
+                        clicks:this.insert('\n> ')
                     },{
                         classes:"fa fa-code",
-                        clicks:"insert('`code`')"
+                        clicks:this.insert('`code`')
                     },{
                         classes:"fa fa-picture-o",
-                        clicks:"insert('![Img](http://example.com/)')"
+                        clicks:this.insert('![Img](http://example.com/)')
                     },{
                         classes:"fa fa-list-ul",
-                        clicks:"insert('\n- ')"
+                        clicks:this.insert('\n- ')
                     },{
                         classes:"fa fa-header",
-                        clicks:"insert('\n# ')"
+                        clicks:this.insert('\n# ')
                     },{
                         classes:"fa fa-underline",
-                        clicks:"insert('\n\n---\n\n')"
+                        clicks:this.insert('\n\n---\n\n')
                     },{
                         classes:"fa fa-th",
-                        clicks:"insert('\n\n| title | title | title |\n| --- | --- | --- |\n| item | item | item |')"
+                        clicks:this.insert('\n\n| title | title | title |\n| --- | --- | --- |\n| item | item | item |')
                     },{
                         classes:"fa fa-github",
-                        clicks:"redirect('https://github.com/jrainlau/markcook')"
+                        clicks:this.redirect('https://github.com/jrainlau/markcook')
                     },{
                         classes:"fa fa-question",
-                        clicks:"redirect('https://github.com/jrainlau/markcook/issues')"
+                        clicks:this.redirect('https://github.com/jrainlau/markcook/issues')
                     }
                 ]
+            }
+        },
+        methods:{
+            showMenu(){
+                alert(1)
+                this.$store.dispatch('showMenu')
+            },
+            insert(content){
+                return function(){
+                    alert(content)
+                }
+            },
+            redirect(url){
+                return function(){
+                    window.open(url,'_blank')
+                }
             }
         }
     }

@@ -1,5 +1,5 @@
 <template lang="pug">
-    .app
+    .app(:class="showMenu ? 'show-menu' : ''")
         side-menu
         main-body
 </template>
@@ -9,6 +9,11 @@
     import mainBody from './components/mainBody.vue'
     import './styl/reset.styl'
     export default {
+        computed:{
+            showMenu(){
+                return this.$store.state.showMenu
+            }
+        },
         components:{
             ['main-body']:mainBody,
             ['side-menu']:sideMenu
