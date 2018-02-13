@@ -37,62 +37,21 @@
         },
         methods:{
             newArticle(){
-                alert(1)
+                this.$store.dispatch('newArticle')
+            },
+            deleteThis(i){
+                this.$store.dispatch('deleteThis' , i)
             }
         },
         computed:{
             articleList(){
-                return [
-                    {
-                        current:true,
-                        content:"das"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },{
-                        current:false,
-                        content:"ddsadas"
-                    },
-                ]
+                return this.$store.getters.articleList
+            },
+            titleHtml(){
+                return this.$store.getters.articleRaw.split('\n')[0] + '.html'
+            },
+            titleMd(){
+                return this.$store.getters.articleRaw.split('\n')[0] + '.md'
             }
         }
     }

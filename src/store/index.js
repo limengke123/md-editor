@@ -3,6 +3,7 @@
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
+import marked from 'marked'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,9 @@ const createID = () => {
         t += Math.floor(Math.random() * 10)
     }
     return t
+}
+const saveId = (state) =>{
+    localStorage.setItem('idArr',state.articleList.forEach(val => val.id).join(','))
 }
 const store = new Vuex.Store({
     state:{
@@ -36,13 +40,47 @@ const store = new Vuex.Store({
                 current: true
             }
             state.articleList.push(newOne)
+        },
+        DELETE_ARTICLE(state,pos){
+            if(state.articleList.length > 1){
+                //const idArr = localStorage.getItem('idArr').split(',')
+                //const idArrString = idArr.filter((val,index) => index != pos).join(',')
+                //localStorage.setItem('idArr',idArrString)
+                state.articleList.splice(pos,1)
+            }
+        },
+        TEXT_INPUT(state,text){
+            console.log(text)
+            state.articleList.filter(val => val.current)[0].content = text
         }
     },
     actions:{
         showMenu({commit}){
             commit('SHOW_MENU')
+        },
+        newArticle({commit}){
+            commit('NEW_ARTICLE')
+        },
+        deleteThis({commit}){
+            commit('DELETE_ARTICLE')
+        },
+        textInput({commit},text){
+            console.log('action',text)
+            commit('TEXT_INPUT',text)
         }
     },
+    getters:{
+        articleList(state){
+            return state.articleList
+        },
+        articleRaw(state){
+            return state.articleList.filter(val => val.current)[0].content
+        },
+        articleMd(state,getters){
+            console.log(marked)
+            return marked(getters.articleRaw)
+        }
+    }
 })
 
 export default store

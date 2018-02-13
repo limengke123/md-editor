@@ -1,10 +1,14 @@
 <template lang="pug">
-    .outputer
+    .outputer(v-html="parsedHtml")
 </template>
 
 <script>
     export default {
-        
+        computed:{
+            parsedHtml(){
+                return this.$store.getters.articleMd
+            }
+        }
     }
 </script>
 

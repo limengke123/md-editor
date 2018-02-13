@@ -1,11 +1,22 @@
 <template lang="pug">
     .inputer-wrapper
-        textarea.inputer(autofocus)
+        textarea.inputer(autofocus,
+                        :value="rawText",
+                        @input="inputting")
 </template>
 
 <script>
     export default {
-        
+        computed:{
+            rawText(){
+                return this.$store.getters.articleRaw
+            }
+        },
+        methods:{
+            inputting(e){
+                this.$store.dispatch('textInput',e.target.value)
+            }
+        }
     }
 </script>
 

@@ -6,6 +6,12 @@
 </template>
 
 <script>
+    const setContent = (inputer,oldContent,newContent,content,endPosition,start,end) => {
+        newContent = oldContent.substring(0,endPosition) + content + oldContent.substring(endPosition,oldContent.length)
+        inputer.value = newContent
+        inputer.setSelectionRange(endPosition + start,endPosition + content.length - end)
+        return newContent
+    }
     export default {
         data(){
             return {
