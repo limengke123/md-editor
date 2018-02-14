@@ -12,6 +12,13 @@
         inputer.setSelectionRange(endPosition + start,endPosition + content.length - end)
         return newContent
     }
+    const updateContent = (inputer,oldContent,newContent,startPosition,endPosition,symbol1,symbol2) => {
+        newContent = oldContent.substring(0,startPosition) + symbol1 + oldContent.substring(startPosition,endPosition) + symbol2
+        inputer.value = newContent
+        const len = newContent.length
+        inputer.setSelectionRange(len,len)
+        return newContent
+    }
     export default {
         data(){
             return {
@@ -61,12 +68,63 @@
         },
         methods:{
             showMenu(){
-                alert(1)
                 this.$store.dispatch('showMenu')
             },
             insert(content){
-                return function(){
-                    alert(content)
+                return () => {
+                    const inputer = document.querySelector('#inputer')
+                    const startPosition = inputer.selectionStart
+                    const endPosition = inputer.selectionEnd
+                    const oldContent = inputer.value
+                    inputer.focus()
+                    let newContent = ''
+                    if(startPosition === endPosition) {
+                        switch(content){
+                            case '**Bold**':
+                                newContent = setContent(inputer,oldContent,newContent,content,endPosition,2,2)
+                                break
+                            case '*Itaic*':
+                                newContent = setContent(inputer,oldContent,newContent,content,endPosition,1,1)
+                                break
+                            case '[Link](http://example.com/)':
+                                newContent = setContent(inputer,oldContent,newContent,content,endPosition,7,1)
+                                break
+                            case '`code`':
+                                newContent = setContent(inputer,oldContent,newContent,content,endPosition,1,1)
+                                break
+                            case '![Img](http://example.com/)':
+                                newContent = setContent(inputer,oldContent,newContent,content,endPosition,7,1)
+                                break
+                            default:
+                                newContent = oldContent.substring(0,endPosition) + content + oldContent.substring(endPosition, oldContent.length)
+                                break
+                        }
+                    } else{
+                        switch (content){
+                            case '**Bold**':
+                                newContent = updateContent(inputer,oldContent,newContent,startPosition,endPosition,'**','**')
+                                break
+                            case '*Italic*':
+                                newContent = updateContent(inputer, oldContent, newContent, startPosition, endPosition, '*', '*')
+                                break
+                            case '`code`':
+                                newContent = updateContent(inputer, oldContent, newContent, startPosition, endPosition, '`', '`')
+                                break
+                            case '[Link](http://example.com/)':
+                                newContent = updateContent(inputer, oldContent, newContent, startPosition, endPosition, '[', '](http://example.com/)')
+                                break
+                            case '![Img](http://example.com/)':
+                                newContent = updateContent(inputer, oldContent, newContent, startPosition, endPosition, '![', '](http://example.com/)')
+                                break
+                            default:
+                                return false
+                                break
+
+                        }
+                    }
+                    if(newContent.length > 0){
+                        this.$store.dispatch('textInput',newContent)
+                    }
                 }
             },
             redirect(url){

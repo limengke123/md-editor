@@ -5,7 +5,7 @@
             ul.files
                 li(v-for="(article,index) in articleList" ,
                     :class="article.current ? 'current' : ''",
-                    :key="article"
+                    :key="index"
                 )
                     span(@click="selectThis(index)") {{articleList[index].content.split('\n')[0] }}
                     button(v-if="articleList.length > 1" , class="delete-btn" , @click="deleteThis(index)")

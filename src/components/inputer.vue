@@ -1,6 +1,6 @@
 <template lang="pug">
     .inputer-wrapper
-        textarea.inputer(autofocus,
+        textarea#inputer(autofocus,
                         :value="rawText",
                         @input="inputting")
 </template>
@@ -25,7 +25,7 @@
     .inputer-wrapper
         width 50%
         margin-right 10px
-        .inputer
+        #inputer
             box-sizing border-box
             width 100%
             height 100%
