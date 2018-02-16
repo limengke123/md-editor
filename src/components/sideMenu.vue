@@ -59,6 +59,7 @@
 
 <style lang="stylus" scoped>
     .sideMenu
+        float left
         display flex
         flex-direction column
         flex-shrink 0
