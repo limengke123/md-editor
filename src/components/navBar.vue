@@ -2,13 +2,14 @@
     nav
         ul
             li(v-for="btn in btns")
-                button(@click="btn.clicks"): i(:class="btn.classes")
+                button(@click="btn.clicks",:title="btn.title"): i(:class="btn.classes")
 </template>
 
 <script>
     const setContent = (inputer,oldContent,newContent,content,endPosition,start,end) => {
         newContent = oldContent.substring(0,endPosition) + content + oldContent.substring(endPosition,oldContent.length)
         inputer.value = newContent
+        debugger
         inputer.setSelectionRange(endPosition + start,endPosition + content.length - end)
         return newContent
     }
@@ -25,43 +26,56 @@
                 btns:[
                     {
                         classes:"fa fa-bars",
-                        clicks:this.showMenu
+                        clicks:this.showMenu,
+                        title:"暂时没用"
                     },{
                         classes:"fa fa-bold",
-                        clicks:this.insert('**Bold**')
+                        clicks:this.insert('**Bold**'),
+                        title:"加粗"
                     },{
                         classes:"fa fa-italic",
-                        clicks:this.insert('*Italic*')
+                        clicks:this.insert('*Italic*'),
+                        title:"斜体"
                     },{
                         classes:"fa fa-link",
-                        clicks:"[Link](http://example.com/)"
+                        clicks:this.insert("[Link](http://example.com/)"),
+                        title:"链接"
                     },{
                         classes:"fa fa-quote-left",
-                        clicks:this.insert('\n> ')
+                        clicks:this.insert('\n> '),
+                        title:"引用"
                     },{
                         classes:"fa fa-code",
-                        clicks:this.insert('`code`')
+                        clicks:this.insert('`code`'),
+                        title:"代码"
                     },{
                         classes:"fa fa-picture-o",
-                        clicks:this.insert('![Img](http://example.com/)')
+                        clicks:this.insert('![Img](http://example.com/)'),
+                        title:"图片"
                     },{
                         classes:"fa fa-list-ul",
-                        clicks:this.insert('\n- ')
+                        clicks:this.insert('\n- '),
+                        title:"列表"
                     },{
                         classes:"fa fa-header",
-                        clicks:this.insert('\n# ')
+                        clicks:this.insert('\n# '),
+                        title:"标题"
                     },{
                         classes:"fa fa-underline",
-                        clicks:this.insert('\n\n---\n\n')
+                        clicks:this.insert('\n\n---\n\n'),
+                        title:"下划线"
                     },{
                         classes:"fa fa-th",
-                        clicks:this.insert('\n\n| title | title | title |\n| --- | --- | --- |\n| item | item | item |')
+                        clicks:this.insert('\n\n| title | title | title |\n| --- | --- | --- |\n| item | item | item |'),
+                        title:"列表"
                     },{
                         classes:"fa fa-github",
-                        clicks:this.redirect('https://github.com/jrainlau/markcook')
+                        clicks:this.redirect('https://github.com/jrainlau/markcook'),
+                        title:"地址"
                     },{
                         classes:"fa fa-question",
-                        clicks:this.redirect('https://github.com/jrainlau/markcook/issues')
+                        clicks:this.redirect('https://github.com/jrainlau/markcook/issues'),
+                        title:"问题"
                     }
                 ]
             }
@@ -83,7 +97,7 @@
                             case '**Bold**':
                                 newContent = setContent(inputer,oldContent,newContent,content,endPosition,2,2)
                                 break
-                            case '*Itaic*':
+                            case '*Italic*':
                                 newContent = setContent(inputer,oldContent,newContent,content,endPosition,1,1)
                                 break
                             case '[Link](http://example.com/)':
@@ -137,6 +151,7 @@
 </script>
 
 <style lang="stylus" scoped>
+    @import '../styl/li.styl'
     nav
         height w=45px
         box-sizing border-box

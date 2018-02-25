@@ -4,8 +4,8 @@
             img(:src="logo")
             ul.files
                 li(v-for="(article,index) in articleList" ,
-                    :class="article.current ? 'current' : ''",
-                    :key="index"
+                :class="article.current ? 'current' : ''",
+                :key="index"
                 )
                     span(@click="selectThis(index)") {{articleList[index].content.split('\n')[0] }}
                     button(v-if="articleList.length > 1" , class="delete-btn" , @click="deleteThis(index)")
@@ -32,18 +32,39 @@
     export default {
         data(){
             return {
-                logo
+                logo,
+                htmlDataUrl: "",
+                mdDataUrl: ""
             }
         },
-        methods:{
+        methods: {
             newArticle(){
                 this.$store.dispatch('newArticle')
             },
             deleteThis(i){
-                this.$store.dispatch('deleteThis' , i)
+                this.$store.dispatch('deleteThis', i)
+            },
+            createUrl(mode){
+                let val, blobObj, objectUrl
+                switch (mode) {
+                    case 'html':
+                        val = this.$store.getters.articleRaw
+                        blobObj = new Blob([val])
+                        objectUrl = URL.createObjectURL(blobObj)
+                        this.htmlDataUrl = objectUrl
+                        break
+                    case "md":
+                        val = this.$store.getters.articleMd
+                        blobObj = new Blob([val])
+                        objectUrl = URL.createObjectURL(blobObj)
+                        this.mdDataUrl = objectUrl
+                        break
+                    default:
+                        break
+                }
             }
         },
-        computed:{
+        computed: {
             articleList(){
                 return this.$store.getters.articleList
             },
@@ -58,8 +79,9 @@
 </script>
 
 <style lang="stylus" scoped>
+    @import '../styl/li.styl'
     .sideMenu
-        float left
+    //float left
         display flex
         flex-direction column
         flex-shrink 0
@@ -88,7 +110,7 @@
                     color #9E9E9E
                     cursor default
                     transition all ease .3s
-                    height w=51px
+                    height w = 51px
                     line-height w
                     display flex
                     justify-content space-between
@@ -121,7 +143,7 @@
                             display inline-block
             .options
                 li
-                    height w=55px
+                    height w = 55px
                     line-height w
                     color #616161
                     transition all .3s ease

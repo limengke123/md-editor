@@ -77,7 +77,6 @@ const store = new Vuex.Store({
             return state.articleList.filter(val => val.current)[0].content
         },
         articleMd(state,getters){
-            console.log(marked)
             return marked(getters.articleRaw)
         }
     }

@@ -8,7 +8,9 @@ import store from './store/index'
 
 const root = document.createElement('div')
 document.body.appendChild(root)
+
 new Vue({
     store,
     render:h => h(App)
 }).$mount(root)
+

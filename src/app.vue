@@ -1,7 +1,7 @@
 <template lang="pug">
     .app(:class="showMenu ? 'show-menu' : ''")
         side-menu
-        main-body#mainBody
+        main-body.mainBody
 </template>
 
 <script>
@@ -24,13 +24,18 @@
 
 <style lang="stylus" scoped>
     .app
-        //display flex
+        display flex
+        //position relative
+        //left -225px
         height 100%
         background #e0e0e0
         font-family Microsoft Yahei,PingHei,Helvetica Neue,Helvetica,STHeitiSC-Light,Arial,sans-serif
-    .show-menu
         transition all 0.5s
-        transform translateX(-225px)
-        #mainBody
-           //width 100%
+    .show-menu
+        //left 0
+        //transform translateX(-225px)
+        .sideMenu
+            //transform translateX(-225px)
+        .mainBody
+            //padding-right 225px
 </style>
